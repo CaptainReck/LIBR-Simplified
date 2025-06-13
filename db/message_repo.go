@@ -21,7 +21,7 @@ func GetMessages(ts int64) []model.Message {
 	query := "SELECT * FROM messages WHERE timestamp = $1"
 	rows, err := Pool.Query(context.Background(), query, ts)
 	if err != nil {
-		fmt.Printf("error inserting message: %v", err)
+		fmt.Printf("error getting messages from db: %v", err)
 		return nil
 	}
 	defer rows.Close()
@@ -31,6 +31,33 @@ func GetMessages(ts int64) []model.Message {
 		var message model.Message
 		if err := rows.Scan(&message.Id, &message.Content, &message.Timestamp, &message.Status); err != nil {
 			log.Fatalf("Error scanning row: %v", err)
+			continue
+		}
+		if message.Status == "rejected" {
+			continue
+		}
+		messages = append(messages, message)
+	}
+	return messages
+}
+
+func GetAllMessages() []model.Message {
+	query := "SELECT * FROM messages"
+	rows, err := Pool.Query(context.Background(), query)
+	if err != nil {
+		fmt.Printf("error getting messages from db: %v", err)
+		return nil
+	}
+	defer rows.Close()
+
+	var messages []model.Message
+	for rows.Next() {
+		var message model.Message
+		if err := rows.Scan(&message.Id, &message.Content, &message.Timestamp, &message.Status); err != nil {
+			log.Fatalf("Error scanning row: %v", err)
+			continue
+		}
+		if message.Status == "rejected" {
 			continue
 		}
 		messages = append(messages, message)

@@ -19,8 +19,14 @@ func Get(w http.ResponseWriter, r *http.Request) {
 
 	params := mux.Vars(r)
 	ts, _ := strconv.ParseInt(params["ts"], 10, 64)
-	fmt.Printf("Get all messages with ts: %d\n", ts)
-	json.NewEncoder(w).Encode(db.GetMessages(ts))
+	fmt.Printf("Get all message with ts: %d\n", ts)
+	messages := db.GetMessages(ts)
+	if len(messages) == 0 {
+		json.NewEncoder(w).Encode("No messages were found.")
+	} else {
+		fmt.Printf("All message with ts: %d were sent\n", ts)
+		json.NewEncoder(w).Encode(messages)
+	}
 }
 
 func Post(w http.ResponseWriter, r *http.Request) {
@@ -50,4 +56,11 @@ func Post(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("Message added to database")
 	json.NewEncoder(w).Encode(response)
 
+}
+
+func GetAll(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	fmt.Println("All the messages are sent")
+	json.NewEncoder(w).Encode(db.GetAllMessages())
 }

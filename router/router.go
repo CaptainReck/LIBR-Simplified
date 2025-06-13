@@ -11,6 +11,7 @@ func Router() *mux.Router {
 
 	r.HandleFunc("/{ts}", controller.Get).Methods("GET")
 	r.HandleFunc("/", controller.Post).Methods("POST")
+	r.HandleFunc("/", controller.GetAll).Methods("GET")
 
 	return r
 }
