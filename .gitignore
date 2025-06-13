@@ -11,3 +11,6 @@
 
 # Ignore dependency folders
 vendor/
+
+# Ignore the built server binary
+server
