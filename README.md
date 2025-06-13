@@ -10,6 +10,7 @@ Simulate decentralized moderation using goroutines, channels, and context timeou
 
 - Submitting a message (`POST /submit`)
 - Retrieving messages by timestamp (`GET /fetch/{timestamp}`)
+- Retrieve all stored messages regardless of timestamp (`GET /fetchall`)
 
 ---
 
@@ -66,7 +67,7 @@ CREATE TABLE messages (
 Create a `.env` file in the root directory:
 
 ```env
-DB_URL=postgres://libruser:librpass@localhost:5432/libr
+DB_URL=
 ```
 
 Replace credentials with yours if needed.
@@ -137,6 +138,34 @@ Retrieve all messages submitted at a specific timestamp.
 ]
 ```
 
+### 📥 `GET /fetch`
+
+Retrieve all messages regardless of timestamp.
+
+**Sample Response:**
+```json
+[
+  {
+    "id": "unique-id",
+    "content": "This is a test message.",
+    "timestamp": 1744219507,
+    "status": "approved"
+  }
+  {
+    "id": "unique-id",
+    "content": "This is a test message.",
+    "timestamp": 1744219507,
+    "status": "approved"
+  }
+  {
+    "id": "unique-id",
+    "content": "This is a test message.",
+    "timestamp": 1744219507,
+    "status": "approved"
+  }
+]
+```
+
 ---
 
 ## 🧠 Simulated Moderation
@@ -172,9 +201,13 @@ The message is **approved if at least 2 moderators approve**, otherwise it's rej
 
 ![POST Rejected](https://github.com/CaptainReck/LIBR-Simplified/blob/main/screenshots/Screenshot%20from%202025-06-13%2018-46-52.png)
 
+### 📤 Fetch All Messages
+
+![GET Fetch](https://github.com/CaptainReck/LIBR-Simplified/blob/main/screenshots/image.png)
+
 ### 📤 Fetch Messages
 
-![GET Fetch](https://github.com/CaptainReck/LIBR-Simplified/blob/main/screenshots/Screenshot%20from%202025-06-13%2018-49-42.png)
+![GET Fetch](https://github.com/CaptainReck/LIBR-Simplified/blob/main/screenshots/image%20copy.png)
 
 ## 🧪 Testing
 
