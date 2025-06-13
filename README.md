@@ -209,6 +209,10 @@ The message is **approved if at least 2 moderators approve**, otherwise it's rej
 
 ![GET Fetch](https://github.com/CaptainReck/LIBR-Simplified/blob/main/screenshots/image%20copy.png)
 
+### 📤 Try Fetching Rejected Messages
+
+![GET Fetch](https://github.com/CaptainReck/LIBR-Simplified/blob/main/screenshots/Screenshot%20from%202025-06-13%2021-25-09.png)
+
 ## 🧪 Testing
 
 Use [Postman](https://www.postman.com/) to test:
