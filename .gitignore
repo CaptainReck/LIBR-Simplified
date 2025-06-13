@@ -1,0 +1,13 @@
+# Ignore environment files
+.env
+
+# Ignore executables or binaries
+*.exe
+*.out
+*.bin
+
+# Ignore VS Code settings (optional)
+.vscode/
+
+# Ignore dependency folders
+vendor/
